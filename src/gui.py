@@ -18,7 +18,10 @@ BUTTON_HEIGHT = FONT_SIZE + (2 * PADDING)
 Sets the size of the window and exits
 """
 def set_size_and_center(w: int, h: int) -> None:
+    # Set size
     set_window_size(w, h)
+
+    # Set position
     m = get_current_monitor()
     sw = get_monitor_width(m)
     sh = get_monitor_height(m)
@@ -29,6 +32,7 @@ Draws a button
 Returns if the button has been clicked
 """
 def draw_button(x: int, y: int, text: str, width: int | None = None, highlight: bool = False) -> bool:
+    # Measure text size, then use that size if no width was provided
     text_w = measure_text(text, FONT_SIZE)
     if width == None:
         width = text_w + (2 * PADDING)
@@ -65,6 +69,7 @@ def choose_columns() -> [str]:
     height = PADDING + (num_rows * row_height) + PADDING
     set_size_and_center(WIDTH, height)
 
+    # Setup some info
     HEADER = "Choose Columns"
     HEADER_X = (WIDTH - measure_text(HEADER, FONT_SIZE)) // 2
     INVALID_SELECTION = "Please select 1 or more columns"
@@ -94,7 +99,7 @@ def choose_columns() -> [str]:
                     break
                 continue
 
-            # Draw column
+            # Draw column button
             col = COLUMNS[i - 1]
             if draw_button(PADDING, y, col[0], highlight=selected[i - 1]):
                 selected[i - 1] = not selected[i - 1]
@@ -121,9 +126,11 @@ def show_image(file: str) -> bool:
     while not window_should_close() and not back_pressed:
         begin_drawing()
         clear_background(WHITE)
+
         draw_texture(img, PADDING, PADDING, WHITE)
         if draw_button(PADDING, PADDING + img.height + PADDING, "Back", width=img.width):
             back_pressed = True
+        
         end_drawing()
     unload_texture(img)
     return not back_pressed
@@ -138,6 +145,7 @@ def open_gui(data: DataFrame) -> None:
     init_window(100, 100, TITLE)
     set_exit_key(0)
     while not window_should_close():
+        # Pick columns
         print("Opening column selector")
         set_window_title(f"{TITLE} | Choose columns")
         cols = choose_columns()
@@ -145,12 +153,15 @@ def open_gui(data: DataFrame) -> None:
             print("User pressed the X, exiting")
             break
 
+        # Plot
         print(f"Plotting columns: {cols}")
         set_window_title(f"{TITLE} | View Graph")
         FILE_NAME = "temp_file"
         if not plot(data, cols, FILE_NAME):
             raise "Failed to plot"
         FILE_NAME += ".png"
+        
+        # Show the image
         print("Showing image")
         x_clicked = show_image(FILE_NAME)
         print("Deleteing temporary image file")
