@@ -12,11 +12,21 @@ COLUMNS = [
     # TODO: more columns here
 ]
 
-def set_size_and_center(w: int, h: int):
+"""
+Sets the size of the window and exits
+"""
+def set_size_and_center(w: int, h: int) -> None:
     raise "TODO"
 
+"""
+Opens a menu where the user can choose columns to plot
+Returns the selected columns
+"""
 def choose_columns() -> [str]:
     raise "TODO"
 
-def open_gui(data: DataFrame):
+"""
+The entrypoint for the GUI
+"""
+def open_gui(data: DataFrame) -> None:
     raise "TODO"
