@@ -12,10 +12,7 @@ COLUMNS = [
     ("Female % Unemployment", "unrate_women"),
     # TODO: more columns here
 ]
-BG_COLOR = Color(0x20, 0x20, 0x20, 0xFF) # Dark gray
-FG_COLOR = WHITE # Used for text
-SELECTED_COLOR = GREEN
-HOVER_COLOR = GRAY
+BUTTON_HEIGHT = FONT_SIZE + (2 * PADDING)
 
 """
 Sets the size of the window and exits
