@@ -55,10 +55,27 @@ def draw_button(x: int, y: int, text: str, width: int | None = None, highlight: 
 
 """
 Opens a menu where the user can choose columns to plot
-Returns the selected columns
+Returns the selected columns, or None if the X was clicked
 """
-def choose_columns() -> [str]:
-    raise "TODO"
+def choose_columns() -> [str] | None:
+    ok_pressed = False
+    selected = [False] * len(COLUMNS)
+
+    while not window_should_close() and not ok_pressed:
+        begin_drawing()
+        clear_background(WHITE)
+        #TODO
+        end_drawing()
+
+    if ok_pressed:
+        return None
+
+    # Convert bool array to columns  names
+    columns = []
+    for i, b in enumerate(selected):
+        if b:
+            columns.append(COLUMNS[i][1])
+    return columns
 
 """
 Shows an image to the user
