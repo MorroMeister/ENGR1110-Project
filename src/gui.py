@@ -57,17 +57,50 @@ def draw_button(x: int, y: int, text: str, width: int | None = None, highlight: 
 Opens a menu where the user can choose columns to plot
 Returns the selected columns, or None if the X was clicked
 """
-def choose_columns() -> [str] | None:
+def choose_columns() -> [str]:
+    # Setup window size
+    WIDTH = 300
+    num_rows = 1 + len(COLUMNS) + 1 # header + columns + ok button
+    row_height = BUTTON_HEIGHT + (2 * PADDING)
+    height = PADDING + (num_rows * row_height) + PADDING
+    set_size_and_center(WIDTH, height)
+
+    HEADER = "Choose Columns"
+    HEADER_X = (WIDTH - measure_text(HEADER, FONT_SIZE)) // 2
+    INVALID_SELECTION = "Please select 1 or more columns"
+    INVALID_SELECTION_X = (WIDTH - measure_text(INVALID_SELECTION, FONT_SIZE)) // 2
+
     ok_pressed = False
     selected = [False] * len(COLUMNS)
-
     while not window_should_close() and not ok_pressed:
         begin_drawing()
         clear_background(WHITE)
-        #TODO
+        for i in range(num_rows):
+            # Draw header
+            if i == 0:
+                draw_text(HEADER, HEADER_X, PADDING * 2, FONT_SIZE, BLACK)
+                continue
+            y = PADDING + (row_height * i)
+            
+            # Draw OK button
+            is_valid_selection = False
+            for j in selected:
+                is_valid_selection |= j
+            if i == num_rows - 1:
+                if not is_valid_selection:
+                    draw_text(INVALID_SELECTION, INVALID_SELECTION_X, y + PADDING, FONT_SIZE, BLACK)
+                elif draw_button(PADDING, y, "OK", width=WIDTH - (2 * PADDING)):
+                    ok_pressed = True
+                    break
+                continue
+
+            # Draw column
+            col = COLUMNS[i - 1]
+            if draw_button(PADDING, y, col[0], highlight=selected[i - 1]):
+                selected[i - 1] = not selected[i - 1]
         end_drawing()
 
-    if ok_pressed:
+    if not ok_pressed:
         return None
 
     # Convert bool array to columns  names
@@ -104,9 +137,8 @@ def open_gui(data: DataFrame) -> None:
     set_exit_key(0)
     while not window_should_close():
         cols = choose_columns()
-        # If invalid choice then retry
-        if not cols or len(cols) == 0:
-            continue
+        if cols == None:
+            break
 
         FILE_NAME = "temp_file"
         if not plot(data, cols, FILE_NAME):
