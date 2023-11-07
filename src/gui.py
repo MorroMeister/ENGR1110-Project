@@ -36,7 +36,7 @@ def choose_columns() -> [str]:
 """
 Shows an image to the user
 """
-def show_iamge(file: str):
+def show_image(file: str):
     raise "TODO"
 
 """
