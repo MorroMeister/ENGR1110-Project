@@ -20,3 +20,4 @@ print("Manipulating data")
 # TODO
 
 gui.open_gui(data)
+print("Exiting")
