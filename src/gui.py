@@ -62,8 +62,9 @@ def choose_columns() -> [str]:
 
 """
 Shows an image to the user
+Returns if the X was clicked
 """
-def show_image(file: str) -> None:
+def show_image(file: str) -> bool:
     img = load_texture(file)
     set_size_and_center(img.width + (2 * PADDING), PADDING + img.height + PADDING + BUTTON_HEIGHT + PADDING)
     back_pressed = False
@@ -76,6 +77,7 @@ def show_image(file: str) -> None:
             clear_background(WHITE)
         end_drawing()
     unload_texture(img)
+    return not back_pressed
 
 """
 The entrypoint for the GUI
@@ -94,8 +96,9 @@ def open_gui(data: DataFrame) -> None:
         if not plot(data, cols, FILE_NAME):
             raise "Failed to plot"
         FILE_NAME += ".png"
-        show_image(FILE_NAME)
-
+        x_clicked = show_image(FILE_NAME)
         remove(FILE_NAME)
+        if x_clicked:
+            break
         
     close_window()
