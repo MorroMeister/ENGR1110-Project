@@ -19,4 +19,4 @@ except Exception as e:
 print("Manipulating data")
 # TODO
 
-gui.open_gui()
+gui.open_gui(data)
