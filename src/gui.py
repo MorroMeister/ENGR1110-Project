@@ -45,6 +45,7 @@ The entrypoint for the GUI
 def open_gui(data: DataFrame) -> None:
     # Setup arbitrary size, this will be updated later
     init_window(100, 100, TITLE)
+    set_exit_key(0)
     while not window_should_close():
         cols = choose_columns()
         # If invalid choice then retry
