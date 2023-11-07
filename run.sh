@@ -20,5 +20,13 @@ folder=$(dirname "$SCRIPT")
 data=$(realpath "$folder/data/unemployment_monthly.csv")
 
 pushd "$folder/src" >/dev/null
+echo "Installing dependencies"
+$py -m pip install --upgrade pip &>/dev/null &2>/dev/null # make pip shut up about being out of date
+$py -m pip install -r ../requirements.txt &>/dev/null &2>/dev/null
+if [[ $? -ne 0 ]]; then
+    echo "Failed to install dependencies"
+    exit -2
+fi
+echo Running
 $py main.py "$data"
 popd >/dev/null
