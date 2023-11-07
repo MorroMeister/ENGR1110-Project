@@ -1,6 +1,7 @@
 from pandas import DataFrame
 from pyray import *
-import plotter
+from os import remove
+from plotter import plot
 
 TITLE = "Group 3 Project"
 FONT_SIZE = 16
@@ -33,13 +34,29 @@ def choose_columns() -> [str]:
     raise "TODO"
 
 """
+Shows an image to the user
+"""
+def show_iamge(file: str):
+    raise "TODO"
+
+"""
 The entrypoint for the GUI
 """
 def open_gui(data: DataFrame) -> None:
     # Setup arbitrary size, this will be updated later
     init_window(100, 100, TITLE)
     while not window_should_close():
-        begin_drawing()
-        clear_background(BG_COLOR)
-        end_drawing()
+        cols = choose_columns()
+        # If invalid choice then retry
+        if not cols or len(cols) == 0:
+            continue
+
+        FILE_NAME = "temp_file"
+        if not plot(data, cols, FILE_NAME):
+            raise "Failed to plot"
+        
+        show_image(FILE_NAME)
+
+        remove(FILE_NAME)
+        
     close_window()
