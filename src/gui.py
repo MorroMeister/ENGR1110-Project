@@ -59,7 +59,7 @@ Returns the selected columns, or None if the X was clicked
 """
 def choose_columns() -> [str]:
     # Setup window size
-    WIDTH = 300
+    WIDTH = 400
     num_rows = 1 + len(COLUMNS) + 1 # header + columns + ok button
     row_height = BUTTON_HEIGHT + (2 * PADDING)
     height = PADDING + (num_rows * row_height) + PADDING
@@ -132,21 +132,31 @@ def show_image(file: str) -> bool:
 The entrypoint for the GUI
 """
 def open_gui(data: DataFrame) -> None:
+    print("Setting up gui")
+    set_trace_log_level(TraceLogLevel.LOG_NONE)
     # Setup arbitrary size, this will be updated later
     init_window(100, 100, TITLE)
     set_exit_key(0)
     while not window_should_close():
+        print("Opening column selector")
+        set_window_title(f"{TITLE} | Choose columns")
         cols = choose_columns()
         if cols == None:
+            print("User pressed the X, exiting")
             break
 
+        print(f"Plotting columns: {cols}")
+        set_window_title(f"{TITLE} | View Graph")
         FILE_NAME = "temp_file"
         if not plot(data, cols, FILE_NAME):
             raise "Failed to plot"
         FILE_NAME += ".png"
+        print("Showing image")
         x_clicked = show_image(FILE_NAME)
+        print("Deleteing temporary image file")
         remove(FILE_NAME)
         if x_clicked:
+            print("User pressed the X, exiting")
             break
-        
+    print("Cleaning up window")
     close_window()
