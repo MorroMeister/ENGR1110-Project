@@ -21,3 +21,4 @@ def plot(data: DataFrame, columns: list[str], file_name: str) -> bool:
 
     # Save as image
     fig.savefig(file_name + ".png")
+    return True
