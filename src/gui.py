@@ -74,7 +74,6 @@ def show_image(file: str) -> bool:
         draw_texture(img, PADDING, PADDING, WHITE)
         if draw_button(PADDING, PADDING + img.height + PADDING, "Back", width=img.width):
             back_pressed = True
-            clear_background(WHITE)
         end_drawing()
     unload_texture(img)
     return not back_pressed
@@ -87,7 +86,7 @@ def open_gui(data: DataFrame) -> None:
     init_window(100, 100, TITLE)
     set_exit_key(0)
     while not window_should_close():
-        cols = ["unrate_men", "unrate_women"]#choose_columns()
+        cols = choose_columns()
         # If invalid choice then retry
         if not cols or len(cols) == 0:
             continue
