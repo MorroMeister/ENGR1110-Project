@@ -17,7 +17,7 @@ except Exception as e:
     exit(2)
 
 print("Manipulating data")
-# TODO
+manipulator.merge_columns(data, 'unrate_18_to_19', 'unrate_20_to_24', 'unrate_18_to_24')
 
 gui.open_gui(data)
 print("Exiting")
