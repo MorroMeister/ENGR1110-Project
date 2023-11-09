@@ -15,7 +15,7 @@ COLUMNS = [
 BUTTON_HEIGHT = FONT_SIZE + (2 * PADDING)
 
 """
-Sets the size of the window and exits
+Sets the size of the window and centers it on the screen
 """
 def set_size_and_center(w: int, h: int) -> None:
     # Set size
