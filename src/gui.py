@@ -4,8 +4,8 @@ from os import remove
 from plotter import plot
 
 TITLE = "Group 3 Project"
-FONT_SIZE = 16
-PADDING = 4
+FONT_SIZE = 24
+PADDING = 8
 COLUMNS = [
     ("Total % Unemployment", "unrate"),
     ("Male % Unemployment", "unrate_men"),
@@ -63,7 +63,7 @@ Returns the selected columns, or None if the X was clicked
 """
 def choose_columns() -> [str]:
     # Setup window size
-    WIDTH = 400
+    WIDTH = 500
     num_rows = 1 + len(COLUMNS) + 1 # header + columns + ok button
     row_height = BUTTON_HEIGHT + (2 * PADDING)
     height = PADDING + (num_rows * row_height) + PADDING
