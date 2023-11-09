@@ -16,6 +16,7 @@ Use the following instructions for your operating system to run the project.
 
 1. Install Python 3 and Git Bash
 2. Ensure that Python and PIP (included w/ Python) is on the PATH
+- Sometimes you can only get to PIP using `<python executable> -m pip <pip arguments>` depending on how Python was installed
 3. Open Git Bash to the project folder's root (not the `src` folder)
 4. In Git Bash, run `pip install -r requirements.txt`
 5. Then run `sh run.sh`
@@ -24,6 +25,7 @@ Use the following instructions for your operating system to run the project.
 
 1. Install Python 3
 2. Ensure that Python and PIP (included w/ Python) is on the PATH
+- Sometimes you can only get to PIP using `<python executable> -m pip <pip arguments>` depending on how Python was installed
 3. Open a terminal to the project folder's root (not the `src` folder)
 4. In the terminal, run `pip install -r requirements.txt`
 5. Then run `sh run.sh`
