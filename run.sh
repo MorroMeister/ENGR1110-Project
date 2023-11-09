@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 
 py=""
 possible=("python" "python3" "python3.11" "python3.12")
