@@ -6,4 +6,4 @@ Combines column1 and column2 in the data frame, placing the results into outputC
 Returns nothing
 """
 def merge_columns(data: pd.DataFrame, column1: str, column2: str, outputColumn: str):
-    raise "TODO"
+    data[outputColumn] = (data[column1] + data[column2])/2
