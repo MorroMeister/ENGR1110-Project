@@ -19,6 +19,15 @@ def plot(data: DataFrame, columns: list[str], file_name: str) -> bool:
     for y in columns:
         ax.plot(data["date"], data[y])
 
+    #sets x-axis limits to match the data range
+    ax.set_xlim(data["date"].min(), data["date"].max())
+
+    #Sets custom range for x-tick marks
+    #sets ticks for every 60 units
+    ax.set_xticks(range(0, len(data["date"]), 60))
+
+
+
     # Save as image
     fig.savefig(file_name + ".png")
     return True
