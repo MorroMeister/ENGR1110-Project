@@ -7,9 +7,9 @@ TITLE = "Group 3 Project"
 FONT_SIZE = 24
 PADDING = 8
 COLUMNS = [
-    ("Total % Unemployment", "unrate"),
-    ("Male % Unemployment", "unrate_men"),
-    ("Female % Unemployment", "unrate_women"),
+    ("Total", "unrate"),
+    ("Male", "unrate_men"),
+    ("Female", "unrate_women"),
     # TODO: more columns here
 ]
 BUTTON_HEIGHT = FONT_SIZE + (2 * PADDING)
